@@ -11,3 +11,5 @@ class HomeOnRequestE extends HomeEvent {
   final RequestModel requestModel;
   const HomeOnRequestE(this.requestModel);
 }
+
+class HomeClearE extends HomeEvent {}

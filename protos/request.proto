@@ -15,6 +15,8 @@ message Request{
     string body = 3;
     map<string, string> headers = 4;
     string response = 5;
+    bool isError = 6;
+    optional string stackTrace = 7;
 }
 
 service RequestService {

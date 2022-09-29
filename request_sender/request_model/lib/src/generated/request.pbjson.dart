@@ -31,8 +31,13 @@ const Request$json = const {
     const {'1': 'body', '3': 3, '4': 1, '5': 9, '10': 'body'},
     const {'1': 'headers', '3': 4, '4': 3, '5': 11, '6': '.Request.HeadersEntry', '10': 'headers'},
     const {'1': 'response', '3': 5, '4': 1, '5': 9, '10': 'response'},
+    const {'1': 'isError', '3': 6, '4': 1, '5': 8, '10': 'isError'},
+    const {'1': 'stackTrace', '3': 7, '4': 1, '5': 9, '9': 0, '10': 'stackTrace', '17': true},
   ],
   '3': const [Request_HeadersEntry$json],
+  '8': const [
+    const {'1': '_stackTrace'},
+  ],
 };
 
 @$core.Deprecated('Use requestDescriptor instead')
@@ -46,4 +51,4 @@ const Request_HeadersEntry$json = const {
 };
 
 /// Descriptor for `Request`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List requestDescriptor = $convert.base64Decode('CgdSZXF1ZXN0EiAKBHR5cGUYASABKA4yDC5SZXF1ZXN0VHlwZVIEdHlwZRIQCgN1cmwYAiABKAlSA3VybBISCgRib2R5GAMgASgJUgRib2R5Ei8KB2hlYWRlcnMYBCADKAsyFS5SZXF1ZXN0LkhlYWRlcnNFbnRyeVIHaGVhZGVycxIaCghyZXNwb25zZRgFIAEoCVIIcmVzcG9uc2UaOgoMSGVhZGVyc0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgJUgV2YWx1ZToCOAE=');
+final $typed_data.Uint8List requestDescriptor = $convert.base64Decode('CgdSZXF1ZXN0EiAKBHR5cGUYASABKA4yDC5SZXF1ZXN0VHlwZVIEdHlwZRIQCgN1cmwYAiABKAlSA3VybBISCgRib2R5GAMgASgJUgRib2R5Ei8KB2hlYWRlcnMYBCADKAsyFS5SZXF1ZXN0LkhlYWRlcnNFbnRyeVIHaGVhZGVycxIaCghyZXNwb25zZRgFIAEoCVIIcmVzcG9uc2USGAoHaXNFcnJvchgGIAEoCFIHaXNFcnJvchIjCgpzdGFja1RyYWNlGAcgASgJSABSCnN0YWNrVHJhY2WIAQEaOgoMSGVhZGVyc0VudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgJUgV2YWx1ZToCOAFCDQoLX3N0YWNrVHJhY2U=');

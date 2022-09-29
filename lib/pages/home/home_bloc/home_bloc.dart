@@ -12,6 +12,7 @@ part 'home_state.dart';
 class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitialS()) {
     on<HomeOnRequestE>(_onRequest);
+    on<HomeClearE>(_onClear);
     requestSubscription = RequestServer.requestStream.listen(_listen);
   }
   late StreamSubscription<RequestModel> requestSubscription;
@@ -50,5 +51,9 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
       return {'requests': state.requests.map((e) => e.toJson()).toList()};
     }
     return null;
+  }
+
+  FutureOr<void> _onClear(HomeClearE event, Emitter<HomeState> emit) {
+    emit(HomeInitialS());
   }
 }

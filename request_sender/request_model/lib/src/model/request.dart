@@ -39,29 +39,16 @@ class RequestModel extends Equatable {
   final Map<String, String> headers;
   final Map<String, dynamic>? body;
   final String? response;
-  RequestModel({
-    required this.type,
-    required this.url,
-    required this.headers,
-    this.body,
-    this.response,
-  });
-
-  RequestModel copyWith({
-    RequestTypeE? type,
-    String? url,
-    Map<String, String>? headers,
-    Map<String, dynamic>? body,
-    String? response,
-  }) {
-    return RequestModel(
-      type: type ?? this.type,
-      url: url ?? this.url,
-      headers: headers ?? this.headers,
-      body: body ?? this.body,
-      response: response ?? this.response,
-    );
-  }
+  final bool isError;
+  final String? stackTrace;
+  RequestModel(
+      {required this.type,
+      required this.url,
+      required this.headers,
+      required this.isError,
+      this.body,
+      this.response,
+      this.stackTrace});
 
   factory RequestModel.fromR(Request request) {
     Map<String, dynamic>? body;
@@ -76,6 +63,8 @@ class RequestModel extends Equatable {
       headers: request.headers,
       body: body,
       response: request.response,
+      isError: request.isError,
+      stackTrace: request.stackTrace,
     );
   }
 
@@ -86,12 +75,9 @@ class RequestModel extends Equatable {
       headers: headers,
       body: body != null ? jsonEncode(body) : null,
       response: response,
+      isError: isError,
+      stackTrace: stackTrace,
     );
-  }
-
-  @override
-  String toString() {
-    return 'RequestModel(type: $type, url: $url, headers: $headers, body: $body, response: $response)';
   }
 
   @override
@@ -102,6 +88,8 @@ class RequestModel extends Equatable {
       headers,
       body,
       response,
+      isError,
+      stackTrace,
     ];
   }
 
@@ -112,6 +100,8 @@ class RequestModel extends Equatable {
       'headers': headers,
       'body': body,
       'response': response,
+      'isError': isError,
+      'stackTrace': stackTrace,
     };
   }
 
@@ -119,13 +109,20 @@ class RequestModel extends Equatable {
     return RequestModel(
       type: RequestTypeEExt.fromMap(map['type']),
       url: map['url'] as String,
-      headers: Map<String, String>.from((map['headers'] as Map<String, String>)),
-      body: map['body'] != null ? Map<String, dynamic>.from((map['body'] as Map<String, dynamic>)) : null,
+      headers:
+          Map<String, String>.from((map['headers'] as Map<String, String>)),
+      body: map['body'] != null
+          ? Map<String, dynamic>.from((map['body'] as Map<String, dynamic>))
+          : null,
       response: map['response'] != null ? map['response'] as String : null,
+      isError: map['isError'] as bool,
+      stackTrace:
+          map['stackTrace'] != null ? map['stackTrace'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory RequestModel.fromJson(String source) => RequestModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory RequestModel.fromJson(String source) =>
+      RequestModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

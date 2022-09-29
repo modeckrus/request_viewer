@@ -45,9 +45,13 @@ FutureOr<Storage> _createStorage() async {
   } catch (e) {
     log('Error getting application documents directory: $e');
   }
-  storageDirectory ??=
-      Directory(joinPath(Directory.systemTemp.path, 'flutter_bloc'));
-  storage = await HydratedStorage.build(storageDirectory: storageDirectory);
+  var path = joinPath(
+      storageDirectory == null
+          ? Directory.systemTemp.path
+          : storageDirectory.path,
+      'request_viewer');
+  path = joinPath(path, 'hydrated_bloc');
+  storage = await HydratedStorage.build(storageDirectory: Directory(path));
   return storage!;
 }
 

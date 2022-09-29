@@ -41,6 +41,12 @@ class RequestPage extends StatelessWidget {
                   child: Text(model.response ?? ''),
                 )
               : const SizedBox.shrink(),
+          model.stackTrace == null
+              ? SizedBox.shrink()
+              : ListTile(
+                  title: Text('StackTrace'),
+                  subtitle: Text(model.stackTrace ?? ''),
+                )
         ],
       ),
     );
@@ -57,7 +63,8 @@ class HeadersWidget extends StatelessWidget {
       title: Text(const JsonEncoder.withIndent('\t').convert(headers)),
       subtitle: const Text('Headers'),
       onTap: () {
-        setClipBoard(context, const JsonEncoder.withIndent('\t').convert(headers));
+        setClipBoard(
+            context, const JsonEncoder.withIndent('\t').convert(headers));
       },
     );
   }

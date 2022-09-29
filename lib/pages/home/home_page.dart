@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:request_model/request_model.dart';
 import 'package:request_viewer/pages/home/request_widget.dart';
 
+import '../../theme/theme.dart';
 import 'home_bloc/home_bloc.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,13 +27,13 @@ class HomeContent extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            BlocProvider.of<HomeBloc>(context).add(HomeOnRequestE(RequestModel(
-                type: RequestTypeE.GET,
-                url: 'test',
-                headers: const {},
-                response: 'test')));
+            BlocProvider.of<HomeBloc>(context).add(HomeClearE());
           },
-          child: const Icon(Icons.add),
+          backgroundColor:  MyTheme.of(context).redColor,
+          child: Icon(
+            Icons.clear,
+            
+          ),
         ),
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {

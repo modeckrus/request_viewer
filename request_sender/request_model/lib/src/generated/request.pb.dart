@@ -20,6 +20,8 @@ class Request extends $pb.GeneratedMessage {
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'body')
     ..m<$core.String, $core.String>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'headers', entryClassName: 'Request.HeadersEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS)
     ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'response')
+    ..aOB(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isError', protoName: 'isError')
+    ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stackTrace', protoName: 'stackTrace')
     ..hasRequiredFields = false
   ;
 
@@ -30,6 +32,8 @@ class Request extends $pb.GeneratedMessage {
     $core.String? body,
     $core.Map<$core.String, $core.String>? headers,
     $core.String? response,
+    $core.bool? isError,
+    $core.String? stackTrace,
   }) {
     final _result = create();
     if (type != null) {
@@ -46,6 +50,12 @@ class Request extends $pb.GeneratedMessage {
     }
     if (response != null) {
       _result.response = response;
+    }
+    if (isError != null) {
+      _result.isError = isError;
+    }
+    if (stackTrace != null) {
+      _result.stackTrace = stackTrace;
     }
     return _result;
   }
@@ -108,5 +118,23 @@ class Request extends $pb.GeneratedMessage {
   $core.bool hasResponse() => $_has(4);
   @$pb.TagNumber(5)
   void clearResponse() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get isError => $_getBF(5);
+  @$pb.TagNumber(6)
+  set isError($core.bool v) { $_setBool(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasIsError() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearIsError() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get stackTrace => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set stackTrace($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasStackTrace() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearStackTrace() => clearField(7);
 }
 
