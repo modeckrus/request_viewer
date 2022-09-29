@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:proto/proto.dart';
+import 'package:request_model/request_model.dart';
 import 'package:request_viewer/pages/home/request_widget.dart';
 
 import 'home_bloc/home_bloc.dart';
@@ -22,14 +22,14 @@ class HomeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Request Viewer'),
+          title: const Text('Request Viewer'),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             BlocProvider.of<HomeBloc>(context).add(HomeOnRequestE(RequestModel(
                 type: RequestTypeE.GET,
                 url: 'test',
-                headers: {},
+                headers: const {},
                 response: 'test')));
           },
           child: const Icon(Icons.add),
@@ -45,7 +45,7 @@ class HomeContent extends StatelessWidget {
                 },
               );
             }
-            return Center(
+            return const Center(
               child: Text('Пока нет запросов'),
             );
           },

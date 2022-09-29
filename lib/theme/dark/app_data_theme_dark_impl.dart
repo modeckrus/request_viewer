@@ -118,22 +118,21 @@ class AppDataThemeDarkImpl implements AppDataTheme {
   late ElevatedButtonThemeData? elevatedButtonTheme;
 
   @override
-  AppBarTheme? appBarTheme = const AppBarTheme(
-    brightness: Brightness.dark,
-    systemOverlayStyle: SystemUiOverlayStyle(
+  AppBarTheme? appBarTheme = AppBarTheme(
+    systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Color.fromARGB(255, 23, 29, 34),
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.light,
     ),
     backgroundColor: Color.fromARGB(255, 23, 29, 34),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: Colors.white,
     ),
-    titleTextStyle: TextStyle(
+    titleTextStyle: const TextStyle(
       color: Colors.white,
       fontSize: 14,
     ),
-    textTheme: TextTheme(
+    toolbarTextStyle: const TextTheme(
       headline3: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
@@ -148,7 +147,7 @@ class AppDataThemeDarkImpl implements AppDataTheme {
         fontSize: 12,
         color: Colors.white70,
       ),
-    ),
+    ).bodyText2,
   );
 
   @override

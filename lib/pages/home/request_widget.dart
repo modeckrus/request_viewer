@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:proto/proto.dart';
+import 'package:request_model/request_model.dart';
 import 'package:request_viewer/navigator/app_routes.dart';
 
-import '../request/request_page.dart';
 
 class RequestWidget extends StatelessWidget {
   final RequestModel model;

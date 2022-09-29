@@ -1,5 +1,6 @@
 
-import 'package:proto/proto.dart';
+
+import 'package:request_model/request_model.dart';
 
 import 'client.dart';
 

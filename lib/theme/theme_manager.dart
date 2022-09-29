@@ -10,7 +10,7 @@ class ThemeManager {
   const ThemeManager();
 
   static ThemeData light(AppTheme theme) {
-    var caption = TextTheme().caption;
+    var caption = const TextTheme().caption;
     caption = caption?.copyWith(
       color: theme.textTheme.caption?.color,
     );
@@ -54,7 +54,7 @@ class ThemeManager {
   }
 
   static ThemeData dark(AppTheme theme) {
-     var caption = TextTheme().caption;
+     var caption = const TextTheme().caption;
     caption = caption?.copyWith(
       color: theme.textTheme.caption?.color,
     );

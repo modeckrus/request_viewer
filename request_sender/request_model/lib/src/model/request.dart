@@ -2,7 +2,8 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:proto/proto.dart';
+
+import '../../request_model.dart';
 
 enum RequestTypeE {
   GET,
@@ -64,12 +65,10 @@ class RequestModel extends Equatable {
 
   factory RequestModel.fromR(Request request) {
     Map<String, dynamic>? body;
-    if (request.body != null) {
-      try {
-        body = jsonDecode(request.body);
-      } catch (e) {
-        print('Cannot decode body');
-      }
+    try {
+      body = jsonDecode(request.body);
+    } catch (e) {
+      print('Cannot decode body');
     }
     return RequestModel(
       type: RequestTypeE.values[request.type.value],

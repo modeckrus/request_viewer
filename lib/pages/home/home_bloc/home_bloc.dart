@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:proto/proto.dart';
-import 'package:proto/src/generated/request.pb.dart';
+import 'package:request_model/request_model.dart';
 
 import '../../../server/request_server.dart';
 
@@ -37,13 +35,15 @@ class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
     list.add(event.requestModel);
     emit(HomeFetchedS(list));
   }
-  
+
   @override
   HomeState? fromJson(Map<String, dynamic> json) {
-    final list = (json['requests'] as List).map((e) => RequestModel.fromJson(e)).toList();
+    final list = (json['requests'] as List)
+        .map((e) => RequestModel.fromJson(e))
+        .toList();
     return HomeFetchedS(list);
   }
-  
+
   @override
   Map<String, dynamic>? toJson(HomeState state) {
     if (state is HomeFetchedS) {

@@ -63,7 +63,7 @@ class AppTextThemeDarkImpl implements AppTextTheme {
   TextStyle? headline4;
   
   @override
-  TextStyle? caption = TextStyle(
+  TextStyle? caption = const TextStyle(
     color: Colors.white
   );
 }

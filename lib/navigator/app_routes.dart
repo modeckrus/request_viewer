@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proto/proto.dart';
+import 'package:request_model/request_model.dart';
 import 'package:request_viewer/pages/home/home_page.dart';
 import 'package:request_viewer/pages/not_found_page.dart';
 import 'package:request_viewer/pages/request/request_page.dart';
@@ -19,11 +19,11 @@ class AppRoutes {
                 model: args,
               );
         } else {
-          builder = (_) => NotFoundPage();
+          builder = (_) => const NotFoundPage();
         }
         break;
       default:
-        builder = (_) => NotFoundPage();
+        builder = (_) => const NotFoundPage();
     }
     return MaterialPageRoute(builder: builder);
   }

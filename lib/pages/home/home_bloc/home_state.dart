@@ -11,7 +11,7 @@ class HomeInitialS extends HomeState {}
 
 class HomeFetchedS extends HomeState {
   final List<RequestModel> requests;
-  HomeFetchedS(this.requests);
+  const HomeFetchedS(this.requests);
 
   @override
   List<Object> get props => [requests];

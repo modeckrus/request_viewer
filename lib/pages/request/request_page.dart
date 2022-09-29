@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:proto/proto.dart';
+import 'package:request_model/request_model.dart';
 import 'package:request_viewer/theme/theme.dart';
 
 void setClipBoard(BuildContext context, String text) async {
   await Clipboard.setData(ClipboardData(text: text));
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text('Copied to clipboard'),
+    content: const Text('Copied to clipboard'),
     backgroundColor: MyTheme.of(context).greenColor,
   ));
 }
@@ -27,7 +27,7 @@ class RequestPage extends StatelessWidget {
         children: [
           ListTile(
             title: Text(model.url),
-            subtitle: Text('URL'),
+            subtitle: const Text('URL'),
             onTap: () async {
               setClipBoard(context, model.url);
             },
@@ -54,10 +54,10 @@ class HeadersWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(JsonEncoder.withIndent('\t').convert(headers)),
-      subtitle: Text('Headers'),
+      title: Text(const JsonEncoder.withIndent('\t').convert(headers)),
+      subtitle: const Text('Headers'),
       onTap: () {
-        setClipBoard(context, JsonEncoder.withIndent('\t').convert(headers));
+        setClipBoard(context, const JsonEncoder.withIndent('\t').convert(headers));
       },
     );
   }

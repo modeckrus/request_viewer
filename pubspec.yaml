@@ -43,8 +43,8 @@ dependencies:
   equatable: ^2.0.5
   protobuf: ^2.1.0
   grpc: ^3.0.2
-  proto:
-    path: ./request_sender/proto
+  request_model:
+    path: ./request_sender/request_model
   path_provider: ^2.0.11
 
 dev_dependencies:

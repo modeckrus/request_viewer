@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:grpc/src/server/call.dart';
-import 'package:proto/proto.dart';
+import 'package:request_model/request_model.dart';
 
 class RequestServer extends RequestServiceBase {
   static final StreamController<RequestModel> _requestStreamController =

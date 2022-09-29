@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -45,10 +44,10 @@ class MyThemeDataDark implements MyThemeData {
   Color? textAccentColor = const Color.fromRGBO(66, 146, 226, 1);
 
   @override
-  Color? textColor2 = Color.fromARGB(234, 255, 255, 255);
+  Color? textColor2 = const Color.fromARGB(234, 255, 255, 255);
 
   @override
-  Color? textColor3 = Color.fromARGB(255, 224, 224, 224);
+  Color? textColor3 = const Color.fromARGB(255, 224, 224, 224);
   // @override
   // Color? textColor3 = const Color.fromRGBO(0, 138, 148, 1);
 
@@ -177,8 +176,8 @@ class MyThemeDataDark implements MyThemeData {
   Color mainTextColor = const Color.fromARGB(255, 236, 236, 236);
 
   @override
-  Color chartPrimaryColor = Color.fromARGB(255, 57, 146, 119);
+  Color chartPrimaryColor = const Color.fromARGB(255, 57, 146, 119);
 
   @override
-  Color chartWhiteColor = Color.fromARGB(255, 150, 182, 172);
+  Color chartWhiteColor = const Color.fromARGB(255, 150, 182, 172);
 }

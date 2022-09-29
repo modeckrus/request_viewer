@@ -9,5 +9,5 @@ abstract class HomeEvent extends Equatable {
 
 class HomeOnRequestE extends HomeEvent {
   final RequestModel requestModel;
-  HomeOnRequestE(this.requestModel);
+  const HomeOnRequestE(this.requestModel);
 }

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:proto/proto.dart';
+import 'package:request_model/request_model.dart';
 import 'package:request_sender/src/request_client.dart';
 
 import 'client.dart';
