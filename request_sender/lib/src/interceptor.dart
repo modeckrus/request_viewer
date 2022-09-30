@@ -18,7 +18,9 @@ class RequestSenderInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     _renderCurlRepresentation(err.requestOptions,
-        isError: true, stackTrace: err.stackTrace);
+        isError: true,
+        stackTrace: err.stackTrace ?? StackTrace.current,
+        response: err.response);
 
     return handler.next(err); //continue
   }
@@ -29,7 +31,7 @@ class RequestSenderInterceptor extends Interceptor {
     ResponseInterceptorHandler handler,
   ) {
     _renderCurlRepresentation(response.requestOptions,
-        response: response, isError: false);
+        response: response, isError: false, stackTrace: StackTrace.current);
 
     return handler.next(response); //continue
   }
@@ -57,6 +59,13 @@ class RequestSenderInterceptor extends Interceptor {
 Map<String, dynamic>? parseBody(dynamic body) {
   if (body is Map<String, dynamic>) {
     return body;
+  }
+  if (body is String) {
+    try {
+      return jsonDecode(body);
+    } catch (e) {
+      return null;
+    }
   } else {
     return null;
   }
