@@ -72,7 +72,7 @@ Map<String, dynamic>? parseBody(dynamic body) {
 }
 
 String parseResponse(dynamic body) {
-  if (body is Map) {
+  if (body is Map || body is List<dynamic>) {
     return jsonEncode(body);
   }
   return body.toString();
