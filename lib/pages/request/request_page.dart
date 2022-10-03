@@ -96,9 +96,11 @@ class StacktraceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return stackTrace == null
         ? SizedBox.shrink()
-        : ListTile(
-            title: Text('StackTrace'),
-            subtitle: Text(stackTrace),
+        : SingleChildScrollView(
+            child: ListTile(
+              title: Text('StackTrace'),
+              subtitle: Text(stackTrace),
+            ),
           );
   }
 }
@@ -110,12 +112,14 @@ class ResponseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return response != null
-        ? ListTile(
-            onTap: () {
-              setClipBoard(context, response);
-            },
-            title: Text(response),
-            subtitle: const Text('Response'),
+        ? SingleChildScrollView(
+            child: ListTile(
+              onTap: () {
+                setClipBoard(context, response);
+              },
+              title: Text(response),
+              subtitle: const Text('Response'),
+            ),
           )
         : const SizedBox.shrink();
   }
