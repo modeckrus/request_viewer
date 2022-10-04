@@ -1,6 +1,6 @@
 name: request_sender
 description: A package to sendRequest for package request_viewer
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/modeckrus/request_viewer
 
 environment:
