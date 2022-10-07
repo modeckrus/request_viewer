@@ -1,5 +1,8 @@
 ## 1.0.2
 
+- Downgrade sdk version to >=2.16.1
+## 1.0.2
+
 - Fix Debuging
 ## 1.0.1
 
