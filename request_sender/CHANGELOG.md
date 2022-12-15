@@ -1,3 +1,6 @@
+## 1.0.4
+
+- Update request_model
 ## 1.0.3
 
 - Downgrade sdk version to >=2.16.1

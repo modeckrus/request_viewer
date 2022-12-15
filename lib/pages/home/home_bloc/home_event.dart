@@ -8,8 +8,15 @@ abstract class HomeEvent extends Equatable {
 }
 
 class HomeOnRequestE extends HomeEvent {
-  final RequestModel requestModel;
-  const HomeOnRequestE(this.requestModel);
+  final List<RequestModel> requests;
+  const HomeOnRequestE(this.requests);
 }
 
 class HomeClearE extends HomeEvent {}
+
+class HomeInitializeE extends HomeEvent {}
+
+class HomeSearchE extends HomeEvent {
+  final String search;
+  const HomeSearchE(this.search);
+}

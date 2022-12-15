@@ -152,4 +152,11 @@ class AppDataThemeDarkImpl implements AppDataTheme {
 
   @override
   IconThemeData? iconTheme = const IconThemeData(color: Colors.white);
+
+  @override
+  ScrollbarThemeData? scrollbarTheme = const ScrollbarThemeData(
+    radius: Radius.circular(10),
+    thumbVisibility: MaterialStatePropertyAll(true),
+    thumbColor: MaterialStatePropertyAll(Color.fromARGB(255, 11, 211, 168)),
+  );
 }

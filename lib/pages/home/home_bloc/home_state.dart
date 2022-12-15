@@ -2,12 +2,12 @@ part of 'home_bloc.dart';
 
 abstract class HomeState extends Equatable {
   const HomeState();
-  
+
   @override
   List<Object> get props => [];
 }
 
-class HomeInitialS extends HomeState {}
+class HomeLoadingS extends HomeState {}
 
 class HomeFetchedS extends HomeState {
   final List<RequestModel> requests;

@@ -26,22 +26,21 @@ class ThemeManager {
       elevatedButtonTheme: theme.dataTheme.elevatedButtonTheme,
       appBarTheme: theme.dataTheme.appBarTheme,
       tabBarTheme: theme.dataTheme.tabBarTheme,
-
+      scrollbarTheme: theme.dataTheme.scrollbarTheme,
       visualDensity: theme.dataTheme.visualDensity,
       dataTableTheme: theme.dataTheme.dataTableTheme,
 
       textTheme: const TextTheme().copyWith(
-        headline1: theme.textTheme.headline1,
-        headline2: theme.textTheme.headline2,
-        headline3: theme.textTheme.headline3,
-        headline4: theme.textTheme.headline4,
-        headline5: theme.textTheme.headline5,
-        bodyText1: theme.textTheme.bodyText1,
-        bodyText2: theme.textTheme.bodyText2,
-        subtitle1: theme.textTheme.subtitle1,
-        subtitle2: theme.textTheme.subtitle2,
-        caption: caption
-      ),
+          headline1: theme.textTheme.headline1,
+          headline2: theme.textTheme.headline2,
+          headline3: theme.textTheme.headline3,
+          headline4: theme.textTheme.headline4,
+          headline5: theme.textTheme.headline5,
+          bodyText1: theme.textTheme.bodyText1,
+          bodyText2: theme.textTheme.bodyText2,
+          subtitle1: theme.textTheme.subtitle1,
+          subtitle2: theme.textTheme.subtitle2,
+          caption: caption),
 
       // cardColor: theme.colors.colorScheme?.onSecondary,
 
@@ -54,7 +53,7 @@ class ThemeManager {
   }
 
   static ThemeData dark(AppTheme theme) {
-     var caption = const TextTheme().caption;
+    var caption = const TextTheme().caption;
     caption = caption?.copyWith(
       color: theme.textTheme.caption?.color,
     );
@@ -75,17 +74,16 @@ class ThemeManager {
       dataTableTheme: theme.dataTheme.dataTableTheme,
 
       textTheme: const TextTheme().copyWith(
-        headline1: theme.textTheme.headline1,
-        headline2: theme.textTheme.headline2,
-        headline3: theme.textTheme.headline3,
-        headline4: theme.textTheme.headline4,
-        headline5: theme.textTheme.headline5,
-        bodyText1: theme.textTheme.bodyText1,
-        bodyText2: theme.textTheme.bodyText2,
-        subtitle1: theme.textTheme.subtitle1,
-        subtitle2: theme.textTheme.subtitle2,
-        caption: caption
-      ),
+          headline1: theme.textTheme.headline1,
+          headline2: theme.textTheme.headline2,
+          headline3: theme.textTheme.headline3,
+          headline4: theme.textTheme.headline4,
+          headline5: theme.textTheme.headline5,
+          bodyText1: theme.textTheme.bodyText1,
+          bodyText2: theme.textTheme.bodyText2,
+          subtitle1: theme.textTheme.subtitle1,
+          subtitle2: theme.textTheme.subtitle2,
+          caption: caption),
 
       // cardColor: theme.colors.colorScheme?.onSecondary,
 
@@ -94,7 +92,6 @@ class ThemeManager {
         primary: theme.colors.primaryColor,
         secondary: theme.colors.accentColor,
       ),
-    
     );
   }
 

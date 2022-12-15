@@ -1,59 +1,65 @@
 import 'dart:async';
 
+import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:request_model/request_model.dart';
+import 'package:super_validation/super_validation_string.dart';
 
 import '../../../server/request_server.dart';
+import '../../../storage/request_db.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
-class HomeBloc extends HydratedBloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeInitialS()) {
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  HomeBloc() : super(HomeLoadingS()) {
+    on<HomeInitializeE>(_initalize);
     on<HomeOnRequestE>(_onRequest);
     on<HomeClearE>(_onClear);
-    requestSubscription = RequestServer.requestStream.listen(_listen);
+    on<HomeSearchE>(_search);
+    searchSubscription ??= search.stream.listen(_listenSearch);
   }
-  late StreamSubscription<RequestModel> requestSubscription;
-
-  @override
-  Future<void> close() async {
-    await requestSubscription.cancel();
-    return super.close();
+  final SuperValidation search = SuperValidation();
+  StreamSubscription<String>? searchSubscription;
+  void initialize() {
+    add(HomeInitializeE());
   }
 
-  void _listen(RequestModel event) {
-    add(HomeOnRequestE(event));
+  void clear() {
+    add(HomeClearE());
+  }
+
+  void onRequest(List<RequestModel> models) {
+    add(HomeOnRequestE(models));
+  }
+
+  late StreamSubscription<List<RequestModel>> dbSubscription;
+  FutureOr<void> _onClear(HomeClearE event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingS());
+    await db.clear();
+    emit(HomeFetchedS([]));
+  }
+
+  RequestDb db = RequestDb();
+  FutureOr<void> _initalize(
+      HomeInitializeE event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingS());
+    await db.initialize();
+    dbSubscription = db.findRequestsStream().listen((event) {
+      onRequest(event);
+    });
   }
 
   FutureOr<void> _onRequest(HomeOnRequestE event, Emitter<HomeState> emit) {
-    var list = <RequestModel>[];
-    final currentState = state;
-    if (currentState is HomeFetchedS) {
-      list.addAll(currentState.requests);
-    }
-    list.add(event.requestModel);
-    emit(HomeFetchedS(list));
+    emit(HomeFetchedS(event.requests));
   }
 
-  @override
-  HomeState? fromJson(Map<String, dynamic> json) {
-    final list = (json['requests'] as List)
-        .map((e) => RequestModel.fromJson(e))
-        .toList();
-    return HomeFetchedS(list);
+  void _listenSearch(String search) {
+    add(HomeSearchE(search));
   }
 
-  @override
-  Map<String, dynamic>? toJson(HomeState state) {
-    if (state is HomeFetchedS) {
-      return {'requests': state.requests.map((e) => e.toJson()).toList()};
-    }
-    return null;
-  }
-
-  FutureOr<void> _onClear(HomeClearE event, Emitter<HomeState> emit) {
-    emit(HomeInitialS());
+  FutureOr<void> _search(HomeSearchE event, Emitter<HomeState> emit) async {
+    final requests = await db.findRequests(query: event.search);
+    emit(HomeFetchedS(requests));
   }
 }

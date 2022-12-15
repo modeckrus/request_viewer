@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:request_model/request_model.dart';
 import 'package:request_viewer/theme/theme.dart';
 
+import 'response_widget.dart';
+
 void setClipBoard(BuildContext context, String text) async {
   await Clipboard.setData(ClipboardData(text: text));
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -56,12 +58,17 @@ class _RequestPageState extends State<RequestPage>
           children: [
             ListTile(
               title: Text(widget.model.url),
-              subtitle: const Text('URL'),
+              subtitle: Text('URL',
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: MyTheme.of(context).textAccentColor)),
               onTap: () async {
                 setClipBoard(context, widget.model.url);
               },
             ),
+            Divider(),
             HeadersWidget(headers: widget.model.headers),
+            Divider(),
             widget.model.body != null
                 ? ListTile(
                     onTap: () {
@@ -72,7 +79,10 @@ class _RequestPageState extends State<RequestPage>
                     },
                     title: Text(JsonEncoder.withIndent('\t')
                         .convert(widget.model.body!)),
-                    subtitle: const Text('Body'),
+                    subtitle: Text('Body',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: MyTheme.of(context).textAccentColor)),
                   )
                 : const SizedBox.shrink(),
           ],
@@ -105,26 +115,6 @@ class StacktraceWidget extends StatelessWidget {
   }
 }
 
-class ResponseWidget extends StatelessWidget {
-  final String response;
-  const ResponseWidget({super.key, required this.response});
-
-  @override
-  Widget build(BuildContext context) {
-    return response != null
-        ? SingleChildScrollView(
-            child: ListTile(
-              onTap: () {
-                setClipBoard(context, response);
-              },
-              title: Text(response),
-              subtitle: const Text('Response'),
-            ),
-          )
-        : const SizedBox.shrink();
-  }
-}
-
 class HeadersWidget extends StatelessWidget {
   final Map<String, String> headers;
   const HeadersWidget({super.key, required this.headers});
@@ -133,7 +123,9 @@ class HeadersWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(const JsonEncoder.withIndent('\t').convert(headers)),
-      subtitle: const Text('Headers'),
+      subtitle: Text('Headers',
+          style: TextStyle(
+              fontSize: 16, color: MyTheme.of(context).textAccentColor)),
       onTap: () {
         setClipBoard(
             context, const JsonEncoder.withIndent('\t').convert(headers));

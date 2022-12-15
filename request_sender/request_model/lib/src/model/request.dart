@@ -6,11 +6,15 @@ import 'package:equatable/equatable.dart';
 import '../../request_model.dart';
 
 enum RequestTypeE {
-  GET,
-  POST,
-  PUT,
-  DELETE,
-  PATCH,
+  GET(0),
+  POST(1),
+  PUT(2),
+  DELETE(3),
+  PATCH(4);
+
+  const RequestTypeE(this.value);
+
+  final int value;
 }
 
 extension RequestTypeEExt on RequestTypeE {
@@ -92,37 +96,4 @@ class RequestModel extends Equatable {
       stackTrace,
     ];
   }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'type': type.toMap(),
-      'url': url,
-      'headers': headers,
-      'body': body,
-      'response': response,
-      'isError': isError,
-      'stackTrace': stackTrace,
-    };
-  }
-
-  factory RequestModel.fromMap(Map<String, dynamic> map) {
-    return RequestModel(
-      type: RequestTypeEExt.fromMap(map['type']),
-      url: map['url'] as String,
-      headers:
-          Map<String, String>.from((map['headers'] as Map<String, String>)),
-      body: map['body'] != null
-          ? Map<String, dynamic>.from((map['body'] as Map<String, dynamic>))
-          : null,
-      response: map['response'] != null ? map['response'] as String : null,
-      isError: map['isError'] as bool,
-      stackTrace:
-          map['stackTrace'] != null ? map['stackTrace'] as String : null,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory RequestModel.fromJson(String source) =>
-      RequestModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

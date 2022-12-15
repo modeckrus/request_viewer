@@ -5,54 +5,17 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'app.dart';
 
 void main() async {
   MainServer.serve();
-  await runZonedGuarded(
-    () async {
-      HydratedBloc.storage = await _createStorage();
-      runApp(const MyApp());
+  runZonedGuarded(
+    () => runApp(const MyApp()),
+    (error, stackTrace) {
+      log(error.toString(), stackTrace: stackTrace);
     },
-    (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
-}
-
-String joinPath(String p1, String p2) {
-  if (Platform.isWindows) {
-    return '$p1\\$p2';
-  } else {
-    return '$p1/$p2';
-  }
-}
-
-HydratedStorage? storage;
-bool initialized = false;
-
-FutureOr<Storage> _createStorage() async {
-  if (storage != null) return storage!;
-  if (kIsWeb) {
-    storage = await HydratedStorage.build(
-        storageDirectory: HydratedStorage.webStorageDirectory);
-    return storage!;
-  }
-  WidgetsFlutterBinding.ensureInitialized();
-  Directory? storageDirectory;
-  try {
-    storageDirectory = await getApplicationDocumentsDirectory();
-  } catch (e) {
-    log('Error getting application documents directory: $e');
-  }
-  var path = joinPath(
-      storageDirectory == null
-          ? Directory.systemTemp.path
-          : storageDirectory.path,
-      'request_viewer');
-  path = joinPath(path, 'hydrated_bloc');
-  storage = await HydratedStorage.build(storageDirectory: Directory(path));
-  return storage!;
 }
 
 class MyHttpOverrides extends HttpOverrides {

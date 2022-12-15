@@ -19,4 +19,6 @@ abstract class AppDataTheme {
   BottomNavigationBarThemeData? bottomNavigationBarTheme;
 
   AppBarTheme? appBarTheme;
+
+  ScrollbarThemeData? scrollbarTheme;
 }
