@@ -1,6 +1,6 @@
 name: request_sender
 description: A package to sendRequest for package request_viewer
-version: 1.0.4
+version: 1.0.5
 homepage: https://github.com/modeckrus/request_viewer
 
 environment:
@@ -16,4 +16,4 @@ dependencies:
   dio: ^4.0.6
   grpc: ^3.0.2
   protobuf: ^2.1.0
-  request_model: 1.0.1
+  request_model: 1.0.2

@@ -3,17 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:request_model/request_model.dart';
+import 'package:request_viewer/pages/request/curl_widget.dart';
+import 'package:request_viewer/pages/request/text_widget.dart';
 import 'package:request_viewer/theme/theme.dart';
 
 import 'response_widget.dart';
-
-void setClipBoard(BuildContext context, String text) async {
-  await Clipboard.setData(ClipboardData(text: text));
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: const Text('Copied to clipboard'),
-    backgroundColor: MyTheme.of(context).greenColor,
-  ));
-}
 
 class RequestPage extends StatefulWidget {
   final RequestModel model;
@@ -42,6 +36,7 @@ class _RequestPageState extends State<RequestPage>
     super.dispose();
   }
 
+  RequestModel get model => widget.model;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,35 +51,20 @@ class _RequestPageState extends State<RequestPage>
       body: TabBarView(controller: _tabController, children: [
         ListView(
           children: [
-            ListTile(
-              title: Text(widget.model.url),
-              subtitle: Text('URL',
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: MyTheme.of(context).textAccentColor)),
-              onTap: () async {
-                setClipBoard(context, widget.model.url);
-              },
+            TextWidget(
+              lable: 'URL',
+              text: model.url,
+              divided: true,
             ),
-            Divider(),
-            HeadersWidget(headers: widget.model.headers),
-            Divider(),
-            widget.model.body != null
-                ? ListTile(
-                    onTap: () {
-                      setClipBoard(
-                          context,
-                          JsonEncoder.withIndent('\t')
-                              .convert(widget.model.body!));
-                    },
-                    title: Text(JsonEncoder.withIndent('\t')
-                        .convert(widget.model.body!)),
-                    subtitle: Text('Body',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: MyTheme.of(context).textAccentColor)),
-                  )
-                : const SizedBox.shrink(),
+            HeadersWidget(
+              headers: widget.model.headers,
+            ),
+            TextWidget(
+              lable: 'BODY',
+              text: widget.model.body,
+              divided: true,
+            ),
+            CurlWidget(model: widget.model)
           ],
         ),
         ResponseWidget(
@@ -104,14 +84,12 @@ class StacktraceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return stackTrace == null
-        ? SizedBox.shrink()
-        : SingleChildScrollView(
-            child: ListTile(
-              title: Text('StackTrace'),
-              subtitle: Text(stackTrace),
-            ),
-          );
+    return SingleChildScrollView(
+      child: TextWidget(
+        lable: 'STACKTRACE',
+        text: stackTrace,
+      ),
+    );
   }
 }
 
@@ -121,15 +99,10 @@ class HeadersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(const JsonEncoder.withIndent('\t').convert(headers)),
-      subtitle: Text('Headers',
-          style: TextStyle(
-              fontSize: 16, color: MyTheme.of(context).textAccentColor)),
-      onTap: () {
-        setClipBoard(
-            context, const JsonEncoder.withIndent('\t').convert(headers));
-      },
+    return TextWidget(
+      lable: 'HEADERS',
+      text: headers,
+      divided: true,
     );
   }
 }

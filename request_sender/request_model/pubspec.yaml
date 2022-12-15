@@ -1,6 +1,6 @@
 name: request_model
 description: A model for package request_sender
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/modeckrus/request_viewer
 
 environment:

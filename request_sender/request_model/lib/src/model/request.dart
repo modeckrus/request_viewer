@@ -41,7 +41,7 @@ class RequestModel extends Equatable {
   final RequestTypeE type;
   final String url;
   final Map<String, String> headers;
-  final Map<String, dynamic>? body;
+  final dynamic body;
   final String? response;
   final bool isError;
   final String? stackTrace;

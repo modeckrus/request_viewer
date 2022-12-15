@@ -47,7 +47,7 @@ class RequestS {
     this.headers.forEach((element) {
       headers[element.key] = element.value;
     });
-    var parsedBody = <String, dynamic>{};
+    dynamic parsedBody;
     try {
       parsedBody = jsonDecode(body);
     } catch (e) {

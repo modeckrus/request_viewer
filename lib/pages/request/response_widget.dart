@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:scroll_to_word/scroll_to_word.dart';
 
 import 'request_page.dart';
+import 'text_widget.dart';
 
 class ResponseWidget extends StatefulWidget {
   final String response;
@@ -118,7 +119,7 @@ class _ResponseWidgetState extends State<ResponseWidget> {
               ),
               TextButton(
                 onPressed: () {
-                  setClipBoard(context, text);
+                  TextWidget.setClipBoard(context, text);
                 },
                 child: const Icon(Icons.copy),
               ),
